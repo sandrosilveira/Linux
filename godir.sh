@@ -1,12 +1,12 @@
 function listaConfiguracao(){
    if [ ! -f $ARQPRE ]; then
-      echo "*** N„o existe nenhum diretÛrio preferido para o usu·rio!"
+      echo "*** N√£o existe nenhum diret√≥rio preferido para o usu√°rio!"
       return
    fi
-   echo "DiretÛrios preferidos:"
+   echo "Diret√≥rios preferidos:"
    sort $ARQPRE
    echo " "
-   #echo "DiretÛrios do perfil do usu·rio ($HOME)"
+   #echo "Diret√≥rios do perfil do usu√°rio ($HOME)"
    #find $HOME -mindepth 1 -maxdepth 1 -type d -printf '%f\n' | grep -i -v "^\."
 }
 
@@ -25,7 +25,7 @@ function deletaConfiguracao(){
    fi
    LINHA=`grep -i "^$ALIAS\=" $ARQPRE`
    if [ -z "$LINHA" ]; then
-      echo "Alias '$ALIAS' n„o encontrado na lista de preferidos do usu·rio!"
+      echo "Alias '$ALIAS' n√£o encontrado na lista de preferidos do usu√°rio!"
       return
    fi
    sed -i /"$ALIAS="/Id $ARQPRE
@@ -33,11 +33,11 @@ function deletaConfiguracao(){
 
 function adicionaConfiguracao(){
    if [ -z "$DIRETORIO" ]; then
-      echo "setando diretÛrio n„o informado"
+      echo "setando diret√≥rio n√£o informado"
       DIRETORIO=`pwd`
    fi
    if [ -z "$ALIAS" ]; then
-      echo "saindo com alias n„o informado"
+      echo "saindo com alias n√£o informado"
       return
    fi
    if [ -f $ARQPRE ]; then
@@ -45,7 +45,7 @@ function adicionaConfiguracao(){
       if [ ! -z "$LINHA" ]; then
          DIRETORIO=`echo $LINHA | cut -d "=" -f 2`
          RESPOSTA=N
-         read -p "Alias '$ALIAS' j· existe para diretÛrio $DIRETORIO, gostaria de substituÌ-lo (S/N)?" RESPOSTA
+         read -p "Alias '$ALIAS' j√° existe para diret√≥rio $DIRETORIO, gostaria de substitu√≠-lo (S/N)?" RESPOSTA
          declare -u RESPOSTA=$RESPOSTA
          if [ "$RESPOSTA" == "S" ]; then
             deletaConfiguracao

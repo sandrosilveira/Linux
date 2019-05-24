@@ -1,13 +1,13 @@
 #!/bin/bash
-# Script de configuração automática do ambiente linux
+# Script de configuraÃ§Ã£o automÃ¡tica do ambiente linux
 
-# Adiciona usuário ao grupo de compartilhamento de pastas do virtualbox
+# Adiciona usuÃ¡rio ao grupo de compartilhamento de pastas do virtualbox
 echo "Configurando grupo do vboxsf..."
 sudo usermod -a -G vboxsf $USERNAME
-# Coloca permissão nas pastas compartilhadas
-echo "Atribuindo permissão nas pastas compartilhadas..."
+# Coloca permissÃ£o nas pastas compartilhadas
+echo "Atribuindo permissÃ£o nas pastas compartilhadas..."
 sudo chmod 777 /media
-# Se ainda não tem o alias do cls configurado
+# Se ainda nÃ£o tem o alias do cls configurado
 if [ -z "$(grep "alias cls" /etc/bash.bashrc)" ]; then
    echo "Configurando aliases no bashrc ..."
    sudo echo "alias cls='tput reset'" >> /etc/bash.bashrc
@@ -23,7 +23,7 @@ if [ -z "$(grep "alias cls" /etc/bash.bashrc)" ]; then
    sudo echo "alias go='. godir'" >> /etc/bash.bashrc
    sudo echo "alias ccat='pygmentize -g'" >> /etc/bash.bashrc
 fi
-# Se ainda não tem a função do change_dir configurada
+# Se ainda nÃ£o tem a funÃ§Ã£o do change_dir configurada
 if [ -z "$(grep "change_dir" /etc/bash.bashrc)" ]; then
    echo "Configurando change_dir ..."
    sudo echo "function change_dir() {" >> /etc/bash.bashrc
@@ -31,7 +31,7 @@ if [ -z "$(grep "change_dir" /etc/bash.bashrc)" ]; then
    sudo echo "}" >> /etc/bash.bashrc
    sudo echo "export -f change_dir" >> /etc/bash.bashrc
 fi
-# Se ainda não tem a configuração de completamento do bash
+# Se ainda nÃ£o tem a configuraÃ§Ã£o de completamento do bash
 if [ -z "$(grep "completion-ignore-case" /etc/inputrc)" ]; then
    echo "Configurando tab completion..."
    sudo echo "TAB: menu-complete" >> /etc/inputrc

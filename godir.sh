@@ -1,3 +1,4 @@
+#!/bin/bash
 function listaConfiguracao(){
    if [ ! -f $ARQPRE ]; then
       echo "*** Não existe nenhum diretório preferido para o usuário!"

@@ -2,6 +2,7 @@
 # Script de configuração automática do ambiente linux
 
 # Adiciona usuário ao grupo de compartilhamento de pastas do virtualbox
+# TODO: testar se existe o grupo vboxsf, usando o comando groups
 echo "Configurando grupo do vboxsf..."
 sudo usermod -a -G vboxsf $USERNAME
 # Coloca permissão nas pastas compartilhadas

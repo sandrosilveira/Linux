@@ -1,10 +1,10 @@
 #!/bin/bash
 # Script de configuração automática do ambiente linux
-
-# Adiciona usuário ao grupo de compartilhamento de pastas do virtualbox
-# TODO: testar se existe o grupo vboxsf, usando o comando groups
-echo "Configurando grupo do vboxsf..."
-sudo usermod -a -G vboxsf $USERNAME
+# Se existe o grupo 
+if [ ! -z "$(grep "vboxsf" /etc/group)" ]; then
+   echo "Configurando grupo do vboxsf..."
+   sudo usermod -a -G vboxsf $USERNAME
+fi
 # Coloca permissão nas pastas compartilhadas
 echo "Atribuindo permissão nas pastas compartilhadas..."
 sudo chmod 777 /media
@@ -39,3 +39,6 @@ if [ -z "$(grep "completion-ignore-case" /etc/inputrc)" ]; then
    sudo echo "set completion-ignore-case on" >> /etc/inputrc
    sudo echo "\"\e[Z\": \"\e-1\C-i\"" >> /etc/inputrc
 fi
+# Todo: instalar o ruby
+# Todo: instalar o git
+

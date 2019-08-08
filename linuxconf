@@ -8,29 +8,39 @@ fi
 # Coloca permissão nas pastas compartilhadas
 echo "Atribuindo permissão nas pastas compartilhadas..."
 sudo chmod 777 /media
+
+# Identificar se tem /etc/bash.bashrc (ubuntu) ou /etc/bashrc (centos)
+if [ -e "/etc/bash.bashrc" ] ; then
+    BASHRC=/etc/bash.bashrc
+else
+    if [ -e "/etc/bashrc" ] ; then
+      BASHRC=/etc/bashrc
+    fi
+fi
+
 # Se ainda não tem o alias do cls configurado
-if [ -z "$(grep "alias cls" /etc/bash.bashrc)" ]; then
-   echo "Configurando aliases no bashrc ..."
-   sudo echo "alias cls='tput reset'" >> /etc/bash.bashrc
-   sudo echo "alias lf='ls -F'" >> /etc/bash.bashrc
-   sudo echo "alias lt='ls -lrt'" >> /etc/bash.bashrc
-   sudo echo "alias ltr='ls -lt'" >> /etc/bash.bashrc
-   sudo echo "alias grep='grep --directories=skip --color=auto'" >> /etc/bash.bashrc
-   sudo echo "alias is='cd \$ISCOBOL'" >> /etc/bash.bashrc
-   sudo echo "alias iscs='cd \$ISCOBOL/sample;sh isControlset.sh &'" >> /etc/bash.bashrc
-   sudo echo "alias sb='cd /usr/local/bin'" >> /etc/bash.bashrc
-   sudo echo "alias s='cd /RECH/USR'" >> /etc/bash.bashrc
-   sudo echo "alias ctree='cd /usr/local/CtreeSQLServer/BASES/00571S004'" >> /etc/bash.bashrc
-   sudo echo "alias go='. godir'" >> /etc/bash.bashrc
-   sudo echo "alias ccat='pygmentize -g'" >> /etc/bash.bashrc
+if [ -z "$(grep "alias cls" $BASHRC)" ]; then
+   echo "Configurando aliases no $BASHRC ..."
+   sudo echo "alias cls='tput reset'" >> $BASHRC
+   sudo echo "alias lf='ls -F'" >> $BASHRC
+   sudo echo "alias lt='ls -lrt'" >> $BASHRC
+   sudo echo "alias ltr='ls -lt'" >> $BASHRC
+   sudo echo "alias grep='grep --directories=skip --color=auto'" >> $BASHRC
+   sudo echo "alias is='cd \$ISCOBOL'" >> $BASHRC
+   sudo echo "alias iscs='cd \$ISCOBOL/sample;sh isControlset.sh &'" >> $BASHRC
+   sudo echo "alias sb='cd /usr/local/bin'" >> $BASHRC
+   sudo echo "alias s='cd /RECH/USR'" >> $BASHRC
+   sudo echo "alias ctree='cd /usr/local/CtreeSQLServer/BASES/00571S004'" >> $BASHRC
+   sudo echo "alias go='. godir'" >> $BASHRC
+   sudo echo "alias ccat='pygmentize -g'" >> $BASHRC
 fi
 # Se ainda não tem a função do change_dir configurada
-if [ -z "$(grep "change_dir" /etc/bash.bashrc)" ]; then
+if [ -z "$(grep "change_dir" $BASHRC)" ]; then
    echo "Configurando change_dir ..."
-   sudo echo "function change_dir() {" >> /etc/bash.bashrc
-   sudo echo "    cd \$1" >> /etc/bash.bashrc
-   sudo echo "}" >> /etc/bash.bashrc
-   sudo echo "export -f change_dir" >> /etc/bash.bashrc
+   sudo echo "function change_dir() {" >> $BASHRC
+   sudo echo "    cd \$1" >> $BASHRC
+   sudo echo "}" >> $BASHRC
+   sudo echo "export -f change_dir" >> $BASHRC
 fi
 # Se ainda não tem a configuração de completamento do bash
 if [ -z "$(grep "completion-ignore-case" /etc/inputrc)" ]; then
@@ -41,4 +51,3 @@ if [ -z "$(grep "completion-ignore-case" /etc/inputrc)" ]; then
 fi
 # Todo: instalar o ruby
 # Todo: instalar o git
-

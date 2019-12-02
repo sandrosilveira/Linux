@@ -5,11 +5,12 @@ if [ ! -z "$(grep "vboxsf" /etc/group)" ]; then
    echo "Configurando grupo do vboxsf..."
    sudo usermod -a -G vboxsf $USERNAME
 fi
-# Coloca permissão nas pastas compartilhadas
-echo "Atribuindo permissão nas pastas compartilhadas..."
-sudo chmod 777 /media
-
-# Identificar se tem /etc/bash.bashrc (ubuntu) ou /etc/bashrc (centos)
+# Coloca permissão na montagem das pastas compartilhadas
+if [ -d "/media" ]; then
+   echo "Atribuindo permissão nas pastas compartilhadas..."
+   sudo chmod 777 /media
+fi
+# Identifica se tem /etc/bash.bashrc (ubuntu) ou /etc/bashrc (centos)
 if [ -e "/etc/bash.bashrc" ] ; then
     BASHRC=/etc/bash.bashrc
 else
@@ -17,7 +18,6 @@ else
       BASHRC=/etc/bashrc
     fi
 fi
-
 # Se ainda não tem o alias do cls configurado
 if [ -z "$(grep "alias cls" $BASHRC)" ]; then
    echo "Configurando aliases no $BASHRC ..."

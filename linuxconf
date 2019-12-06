@@ -1,14 +1,16 @@
 #!/bin/bash
 # Script de configuração automática do ambiente linux
-# Se existe o grupo 
-if [ ! -z "$(grep "vboxsf" /etc/group)" ]; then
+# Se existe o grupo
+if [ -z "$(grep "vboxsf" /etc/group)" ]; then
    echo "Configurando grupo do vboxsf..."
    sudo usermod -a -G vboxsf $USERNAME
 fi
 # Coloca permissão na montagem das pastas compartilhadas
 if [ -d "/media" ]; then
-   echo "Atribuindo permissão nas pastas compartilhadas..."
-   sudo chmod 777 /media
+   if ! [ -x "/media" ]; then
+      echo "Atribuindo permissão nas pastas compartilhadas..."
+      sudo chmod 777 /media
+   fi
 fi
 # Identifica se tem /etc/bash.bashrc (ubuntu) ou /etc/bashrc (centos)
 if [ -e "/etc/bash.bashrc" ] ; then
@@ -49,19 +51,99 @@ if [ -z "$(grep "completion-ignore-case" /etc/inputrc)" ]; then
    sudo echo "set completion-ignore-case on" >> /etc/inputrc
    sudo echo "\"\e[Z\": \"\e-1\C-i\"" >> /etc/inputrc
 fi
-# Instalação do git
-if [ -x "$(command -v git)" ]; then
+# Instalação do Git
+if ! [ -x "$(command -v git)" ]; then
+   echo "Instalando git..."
    if [ -f /etc/debian_version ]; then
       apt install -y git
    else
       dnf install -y git
    fi
+
+   # TODO: Configurar usuário
+   # git config --global user.name "Sandro Silveira"
+   # git config --global user.email "sandrosilveira@gmail.com"
+
+   # TODO: Configurar proxy
+   # git config --global http.proxy http://192.168.1.254:3128
+   # git config --global https.proxy https://192.168.1.254:3128
 fi
-# Instalação do ruby
-if [ -x "$(command -v git)" ]; then
+# Instalação do Ruby
+if ! [ -x "$(command -v ruby)" ]; then
+   echo "Instalando ruby..."
    if [ -f /etc/debian_version ]; then
       apt install -y ruby
    else
       dnf install -y ruby
    fi
+fi
+# Instalação do gnome tweaks
+if ! [ -x "$(command -v gnome-tweaks)" ]; then
+   echo "Instalando gnome tweaks..."
+   if [ -f /etc/debian_version ]; then
+      apt install -y gnome-tweaks
+   else
+      dnf install -y gnome-tweaks
+   fi
+fi
+# Instalação do pygmentize
+if ! [ -x "$(command -v pygmentize)" ]; then
+   echo "Instalando python-pygmentize..."
+   if [ -f /etc/debian_version ]; then
+      apt install -y python-pygments
+   else
+      dnf install -y python3-pygments
+   fi
+fi
+# Instalação do NeoFetch
+if ! [ -x "$(command -v neofetch)" ]; then
+   echo "Instalando neofetch..."
+   if [ -f /etc/debian_version ]; then
+      apt install -y neofetch
+   else
+      curl -o /etc/yum.repos.d/konimex-neofetch-epel-7.repo https://copr.fedorainfracloud.org/coprs/konimex/neofetch/repo/epel-7/konimex-neofetch-epel-7.repo
+      dnf install -y neofetch
+   fi
+fi
+# Se for uma VM VirtualBox
+if [ -z "$(dmesg | grep -i "DMI:.*VirtualBox")" ]; then
+   echo "Ajustando timeout do grub..."
+   # Ajusta o timeout do grub
+   sudo sed -i 's/GRUB_TIMEOUT=[0-9]*/GRUB_TIMEOUT=0/g' /etc/default/grub
+fi
+# Outras instalações (na pasta de scripts do sistema)
+cd /usr/local/bin
+# Instalação do GnuCobol 3
+if ! [ -x "$(command -v cobc)" ]; then
+   wget https://raw.githubusercontent.com/sandrosilveira/benchmarks/master/install-gnucobol3 -O install-gnucobol3
+   chmod 777 install-gnucobol3
+   ./install-gnucobol3
+fi
+# Instalação do Java8 (OpenJdk)
+if ! [ -x "$(command -v java)" ]; then
+   wget https://raw.githubusercontent.com/sandrosilveira/benchmarks/master/install-java8 -O install-java8
+   chmod 777 install-java8
+   ./install-java8
+fi
+# Instalação do 7zip
+if ! [ -x "$(command -v 7za)" ]; then
+   wget https://raw.githubusercontent.com/sandrosilveira/benchmarks/master/install-7zip -O install-7zip
+   chmod 777 install-7zip
+   ./install-7zip
+fi
+# Instalação do cifs
+if ! [ -e "/sbin/mount.cifs" ] ; then
+   wget https://raw.githubusercontent.com/sandrosilveira/benchmarks/master/install-cifs -O install-cifs
+   chmod 777 install-cifs
+   ./install-cifs
+fi
+# Instalação do comando de montagem no f:
+if ! [ -x "$(command -v mountf)" ]; then
+   wget https://raw.githubusercontent.com/sandrosilveira/benchmarks/master/mountf -O mountf
+   chmod 777 mountf
+fi
+# Instalação do comando do pre-processador
+if ! [ -x "$(command -v preproc)" ]; then
+   wget https://raw.githubusercontent.com/sandrosilveira/benchmarks/master/preproc -O preproc
+   chmod 777 preproc
 fi

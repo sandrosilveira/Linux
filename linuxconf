@@ -49,5 +49,19 @@ if [ -z "$(grep "completion-ignore-case" /etc/inputrc)" ]; then
    sudo echo "set completion-ignore-case on" >> /etc/inputrc
    sudo echo "\"\e[Z\": \"\e-1\C-i\"" >> /etc/inputrc
 fi
-# Todo: instalar o ruby
-# Todo: instalar o git
+# Instalação do git
+if [ -x "$(command -v git)" ]; then
+   if [ -f /etc/debian_version ]; then
+      apt install -y git
+   else
+      dnf install -y git
+   fi
+fi
+# Instalação do ruby
+if [ -x "$(command -v git)" ]; then
+   if [ -f /etc/debian_version ]; then
+      apt install -y ruby
+   else
+      dnf install -y ruby
+   fi
+fi

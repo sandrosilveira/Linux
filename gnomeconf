@@ -5,9 +5,10 @@
 dconf write /org/gnome/settings-daemon/plugins/xsettings/antialiasing "'rgba'"
 dconf write /org/gnome/settings-daemon/plugins/xsettings/hinting "'full'"
 # Fontes
+dconf write /org/gnome/desktop/wm/preferences/titlebar-font "'Cantarell Bold 10'"
 dconf write /org/gnome/desktop/interface/font-name "'Cantarell 10'"
 dconf write /org/gnome/desktop/interface/document-font-name "'Cantarell 10'"
-dconf write /org/gnome/desktop/wm/preferences/titlebar-font "'Cantarell Bold 10'"
+dconf write /org/gnome/desktop/interface/monospace-font-name "'Monospace 10'"
 # Exibe o dia da semana
 dconf write /org/gnome/desktop/interface/clock-show-weekday true
 # Habilita minimizar e maximizar
@@ -17,13 +18,19 @@ dconf write /org/gnome/terminal/legacy/profiles:/:b1dcc9dd-5262-4d8d-a863-c897e6
 dconf write /org/gnome/terminal/legacy/profiles:/:b1dcc9dd-5262-4d8d-a863-c897e6d979b9/default-size-rows 36
 dconf write /org/gnome/terminal/legacy/profiles:/:b1dcc9dd-5262-4d8d-a863-c897e6d979b9/font "'Monospace 11'"
 dconf write /org/gnome/terminal/legacy/profiles:/:b1dcc9dd-5262-4d8d-a863-c897e6d979b9/cursor-shape "'underline'"
-dconf write /org/gnome/terminal/legacy/profiles:/:b1dcc9dd-5262-4d8d-a863-c897e6d979b9/use-theme-colors false
-dconf write /org/gnome/terminal/legacy/profiles:/:b1dcc9dd-5262-4d8d-a863-c897e6d979b9/foreground-color "'rgb(211,215,207)'"
-dconf write /org/gnome/terminal/legacy/profiles:/:b1dcc9dd-5262-4d8d-a863-c897e6d979b9/background-color "'rgb(46,52,54)'"
-# Desliga suspensão automática
+#dconf write /org/gnome/terminal/legacy/profiles:/:b1dcc9dd-5262-4d8d-a863-c897e6d979b9/use-theme-colors false
+#dconf write /org/gnome/terminal/legacy/profiles:/:b1dcc9dd-5262-4d8d-a863-c897e6d979b9/foreground-color "'rgb(211,215,207)'"
+#dconf write /org/gnome/terminal/legacy/profiles:/:b1dcc9dd-5262-4d8d-a863-c897e6d979b9/background-color "'rgb(46,52,54)'"
+/org/gnome/terminal/legacy/profiles:/:b1dcc9dd-5262-4d8d-a863-c897e6d979b9/use-transparent-background true
+/org/gnome/terminal/legacy/profiles:/:b1dcc9dd-5262-4d8d-a863-c897e6d979b9/background-transparency-percent 6
+# Desliga a configuração de economia de energia 'apagar a tela'
 dconf write /org/gnome/desktop/session/idle-delay "uint32 0"
 dconf write /org/gnome/settings-daemon/plugins/power/sleep-inactive-ac-type "'nothing'"
+# Desliga tela de bloqueio
+dconf write /org/gnome/desktop/screensaver/lock-enabled false
+# Mostra data na barra superior
+dconf write /org/gnome/desktop/interface/clock-show-date true
 # Favoritos da barra de atividades
-dconf write /org/gnome/shell/favorite-apps "['firefox.desktop', 'org.gnome.Nautilus.desktop', 'org.gnome.Terminal.desktop', 'gnome-system-monitor.desktop', 'org.gnome.Calculator.desktop', 'org.gnome.tweaks.desktop', 'gnome-control-center.desktop', 'org.gnome.Software.desktop', 'org.gnome.PackageUpdater.desktop']"
+# dconf write /org/gnome/shell/favorite-apps "['firefox.desktop', 'org.gnome.Nautilus.desktop', 'org.gnome.Terminal.desktop', 'gnome-system-monitor.desktop', 'org.gnome.Calculator.desktop', 'org.gnome.tweaks.desktop', 'gnome-control-center.desktop', 'org.gnome.Software.desktop', 'org.gnome.PackageUpdater.desktop']"
 # Tamanho normal dos ícones (padrão é large)
-dconf write /org/gnome/nautilus/icon-view/default-zoom-level "'standard'"
+dconf write /org/gnome/nautilus/icon-view/default-zoom-level "'small'"

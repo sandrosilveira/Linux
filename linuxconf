@@ -131,19 +131,27 @@ if ! [ -x "$(command -v 7za)" ]; then
    chmod 777 install-7zip
    ./install-7zip
 fi
-# Instalação do cifs
-if ! [ -e "/sbin/mount.cifs" ] ; then
-   wget https://raw.githubusercontent.com/sandrosilveira/benchmarks/master/install-cifs -O install-cifs
-   chmod 777 install-cifs
-   ./install-cifs
-fi
-# Instalação do comando de montagem no f:
-if ! [ -x "$(command -v mountf)" ]; then
-   wget https://raw.githubusercontent.com/sandrosilveira/benchmarks/master/mountf -O mountf
-   chmod 777 mountf
-fi
-# Instalação do comando do pre-processador
-if ! [ -x "$(command -v preproc)" ]; then
-   wget https://raw.githubusercontent.com/sandrosilveira/benchmarks/master/preproc -O preproc
-   chmod 777 preproc
-fi
+# Na Rech (identificar a disponibilidade do RECHINFO)
+# # Instalação do cifs
+# if ! [ -e "/sbin/mount.cifs" ] ; then
+#    wget https://raw.githubusercontent.com/sandrosilveira/benchmarks/master/install-cifs -O install-cifs
+#    chmod 777 install-cifs
+#    ./install-cifs
+# fi
+# # Instalação do comando de montagem no f:
+# if ! [ -x "$(command -v mountf)" ]; then
+#    wget https://raw.githubusercontent.com/sandrosilveira/benchmarks/master/mountf -O mountf
+#    chmod 777 mountf
+# fi
+# # Instalação do comando do pre-processador
+# if ! [ -x "$(command -v preproc)" ]; then
+#    wget https://raw.githubusercontent.com/sandrosilveira/benchmarks/master/preproc -O preproc
+#    chmod 777 preproc
+# fi
+# Instalação dos scripts utilitários
+apps="vars quebrapath md godir gnomeconf"
+for app in $apps; do
+   echo Instalando $app...
+   sudo wget https://github.com/sandrosilveira/Linux/raw/master/$app -O $app
+   sudo chmod 777 $app
+done

@@ -1,4 +1,7 @@
 #!/bin/bash
+# TODO: testar se está rodando com sudo
+
+
 # Script de configuração automática do ambiente linux
 # Se existe o grupo
 if [ -z "$(grep "vboxsf" /etc/group)" ]; then
@@ -77,15 +80,20 @@ if ! [ -x "$(command -v ruby)" ]; then
       dnf install -y ruby
    fi
 fi
-# Instalação do gnome tweaks
-if ! [ -x "$(command -v gnome-tweaks)" ]; then
-   echo "Instalando gnome tweaks..."
-   if [ -f /etc/debian_version ]; then
-      apt install -y gnome-tweaks
-   else
-      dnf install -y gnome-tweaks
+
+# Se não estiver rodando em WSL
+if ! [ "$(uname -r | grep -i Microsoft)" ]; then
+   # Instalação do gnome tweaks
+   if ! [ -x "$(command -v gnome-tweaks)" ]; then
+      echo "Instalando gnome tweaks..."
+      if [ -f /etc/debian_version ]; then
+         apt install -y gnome-tweaks
+      else
+         dnf install -y gnome-tweaks
+      fi
    fi
 fi
+
 # Instalação do pygmentize
 if ! [ -x "$(command -v pygmentize)" ]; then
    echo "Instalando python-pygmentize..."
@@ -119,12 +127,12 @@ if ! [ -x "$(command -v cobc)" ]; then
    chmod 777 install-gnucobol3
    ./install-gnucobol3
 fi
-# Instalação do Java8 (OpenJdk)
-if ! [ -x "$(command -v java)" ]; then
-   wget https://raw.githubusercontent.com/sandrosilveira/benchmarks/master/install-java8 -O install-java8
-   chmod 777 install-java8
-   ./install-java8
-fi
+# Instalação do Java8 (OpenJdk) - TODO: Identificar se já tem java
+# if ! [ -x "$(command -v java)" ]; then
+#    wget https://raw.githubusercontent.com/sandrosilveira/benchmarks/master/install-java8 -O install-java8
+#    chmod 777 install-java8
+#    ./install-java8
+# fi
 # Instalação do 7zip
 if ! [ -x "$(command -v 7za)" ]; then
    wget https://raw.githubusercontent.com/sandrosilveira/benchmarks/master/install-7zip -O install-7zip

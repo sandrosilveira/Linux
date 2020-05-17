@@ -26,7 +26,12 @@ fi
 # Se ainda não tem o alias do cls configurado
 if [ -z "$(grep "alias cls" $BASHRC)" ]; then
    echo "Configurando aliases no $BASHRC ..."
-   sudo echo "alias cls='tput reset'" >> $BASHRC
+   # Se estiver rodando em WSL
+   if [ "$(uname -r | grep -i Microsoft)" ]; then
+      sudo echo "alias cls='tput reset; tput clear" >> $BASHRC
+   else
+      sudo echo "alias cls='tput reset'" >> $BASHRC
+   fi
    sudo echo "alias lf='ls -F'" >> $BASHRC
    sudo echo "alias lt='ls -lrt'" >> $BASHRC
    sudo echo "alias ltr='ls -lt'" >> $BASHRC

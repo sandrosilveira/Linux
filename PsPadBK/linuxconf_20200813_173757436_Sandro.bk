@@ -1,6 +1,7 @@
 #!/bin/bash
 # TODO: testar se está rodando com sudo
 
+
 # Script de configuração automática do ambiente linux
 # Se existe o grupo
 if [ -z "$(grep "vboxsf" /etc/group)" ]; then
@@ -164,7 +165,6 @@ fi
 apps="vars quebrapath md godir gnomeconf"
 for app in $apps; do
    echo Instalando $app...
-   cd /usr/local/bin
    sudo wget https://github.com/sandrosilveira/Linux/raw/master/$app -O $app
    sudo chmod 777 $app
 done

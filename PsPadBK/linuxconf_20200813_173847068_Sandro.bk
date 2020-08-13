@@ -1,6 +1,7 @@
 #!/bin/bash
 # TODO: testar se está rodando com sudo
 
+
 # Script de configuração automática do ambiente linux
 # Se existe o grupo
 if [ -z "$(grep "vboxsf" /etc/group)" ]; then

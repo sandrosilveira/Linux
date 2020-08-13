@@ -8,3 +8,6 @@ sudo wget https://github.com/sandrosilveira/Linux/raw/master/linuxconf -O linuxc
 Execução:<br>
 sudo chmod 777 linuxconf<br>
 sudo linuxconf<br>
+
+Ou simplesmente:
+curl https://raw.githubusercontent.com/sandrosilveira/Linux/master/linuxconf | bash -s

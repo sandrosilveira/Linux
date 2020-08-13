@@ -10,4 +10,4 @@ sudo chmod 777 linuxconf<br>
 sudo linuxconf<br>
 
 Ou simplesmente:
-curl https://raw.githubusercontent.com/sandrosilveira/Linux/master/linuxconf | bash -s
+curl https://raw.githubusercontent.com/sandrosilveira/Linux/master/linuxconf | sudo bash -s

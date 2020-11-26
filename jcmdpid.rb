@@ -8,7 +8,7 @@ class JCmdPid
       parse_command_line
       execute
     end
-  
+
     def parse_command_line
       @pid = ""
       ARGV.each do |arg|
@@ -19,12 +19,12 @@ class JCmdPid
         @pid = arg
       end
     end
-  
+
     def help
       puts green_message("JCmdPid v0.12 - Explore a java pid")
       puts
     end
-  
+
     def execute
       output = `jcmd #{@pid}`
       if @pid.empty?
@@ -32,7 +32,7 @@ class JCmdPid
         puts output
         exit
       end
-      
+
       output.each_line do |cmd|
         cmd = cmd.rstrip
         if cmd.start_with?(@pid) || cmd.start_with?("The follow") || cmd.start_with?("For more") || cmd == "help" || cmd.empty?
@@ -47,8 +47,7 @@ class JCmdPid
       end
 
     end
-  
+
   end
-  
+
   JCmdPid.new.main
-  

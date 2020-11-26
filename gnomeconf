@@ -1,5 +1,6 @@
 #!/bin/bash
 # Script de configuração automática do ambiente gnome (elaborado no OpenSuse Tumbleweed)
+
 # Comando para descobrir as chaves a serem alteradas: dconf watch /
 # Antialiasing
 dconf write /org/gnome/settings-daemon/plugins/xsettings/antialiasing "'rgba'"

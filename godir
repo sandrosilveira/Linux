@@ -19,7 +19,7 @@ function deletaConfiguracao(){
       if [ ! -z "$DIRETORIO" ]; then
          ALIAS=!DIRETORIO!
          DIRETORIO=
-      else 
+      else
          echo "Informe um Alias para excluir!"
          return
       fi
@@ -50,7 +50,7 @@ function adicionaConfiguracao(){
          declare -u RESPOSTA=$RESPOSTA
          if [ "$RESPOSTA" == "S" ]; then
             deletaConfiguracao
-         else 
+         else
             return
          fi
       fi
@@ -77,13 +77,13 @@ ARQPRE=$HOME/go.properties
 for ARG in "$@" ; do
     declare -l PRM=$ARG
     case "$PRM" in
-    add|a|adiciona) 
+    add|a|adiciona)
         COMANDO=add
         ;;
-    del|d|deleta)    
+    del|d|deleta)
         COMANDO=del
         ;;
-    lst|l|list|lista)    
+    lst|l|list|lista)
         COMANDO=lst
         ;;
     *)
@@ -100,13 +100,13 @@ if [ -z "$COMANDO" ]; then
    mudaDiretorio
 else
     case "$COMANDO" in
-    add) 
+    add)
         adicionaConfiguracao
         ;;
-    del)    
+    del)
         deletaConfiguracao
         ;;
-    lst)    
+    lst)
         listaConfiguracao
         ;;
     esac

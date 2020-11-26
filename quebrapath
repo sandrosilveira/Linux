@@ -1,1 +1,2 @@
+#!/bin/bash
 echo "$PATH" | sed -r "s/C:/C@/g" | tr ':' '\n' | sed -r "s/\"//g" | sed -r "s/C@/C:/g" | sed -r "s/\^\&/\&/g"

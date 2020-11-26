@@ -1,8 +1,12 @@
 #!/bin/bash
-# TODO: testar se está rodando com sudo
-
 # Script de configuração automática do ambiente linux
-# Se existe o grupo
+
+# Verifica se está rodando como root (ou com sudo)
+if [ "$EUID" -ne 0 ]; then
+  echo "Rodar como root ou com sudo..."
+  exit
+fi
+# Se existe o grupo do virtualbox
 if [ -z "$(grep "vboxsf" /etc/group)" ]; then
    echo "Configurando grupo do vboxsf..."
    sudo usermod -a -G vboxsf $USERNAME
@@ -84,8 +88,7 @@ if ! [ -x "$(command -v ruby)" ]; then
       dnf install -y ruby
    fi
 fi
-
-# Se for uma distro com gnome
+# Instalação do gnome tweaks
 if [ -x "$(command -v gnome-shell)" ]; then
    # Se não tem o gnome tweks instalado
    if ! [ -x "$(command -v gnome-tweaks)" ]; then
@@ -97,7 +100,6 @@ if [ -x "$(command -v gnome-shell)" ]; then
       fi
    fi
 fi
-
 # Instalação do pygmentize
 if ! [ -x "$(command -v pygmentize)" ]; then
    echo "Instalando python-pygmentize..."
@@ -117,7 +119,7 @@ if ! [ -x "$(command -v neofetch)" ]; then
       dnf install -y neofetch
    fi
 fi
-# Se for uma VM VirtualBox
+# Ajuste do timeout do Grub em VM VirtualBox
 if [ -z "$(dmesg | grep -i "DMI:.*VirtualBox")" ]; then
    echo "Ajustando timeout do grub..."
    # Ajusta o timeout do grub

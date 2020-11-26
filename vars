@@ -1,1 +1,2 @@
+#!/bin/bash
 set | grep -i "^\w*=.*" --color=never | grep -i -v LS_COLORS | grep -i -v _xspecs | grep -v "=(" | grep -v "^_="

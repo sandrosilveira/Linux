@@ -1,3 +1,4 @@
+#!/bin/bash
 # Script para criar diretório
 mkdir $1
 if [ -d "$1" ] ; then

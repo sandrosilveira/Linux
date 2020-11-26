@@ -71,11 +71,13 @@ if ! [ -x "$(command -v git)" ]; then
       dnf install -y git
    fi
 
+   # git config -l | grep -i user.email
+
    # TODO: Configurar usuário
    # git config --global user.name "Sandro Silveira"
    # git config --global user.email "sandrosilveira@gmail.com"
 
-   # TODO: Configurar proxy
+   # TODO: Configurar proxy se máquina Rech
    # git config --global http.proxy http://192.168.1.254:3128
    # git config --global https.proxy https://192.168.1.254:3128
 fi

@@ -29,10 +29,10 @@ fi
 
 # Configurações globais sugeridas pela Rech
 if [ -f /etc/debian_version ]; then
-   if [ -z "$(grep -i "follow symlinks" /etc/samba/smb.conf)" ]; then
-      sed -i '/\[global\]/a         follow symlinks = yes' /etc/samba/smb.conf
-   fi
-   if [ -z "$(grep -i "wide symlinks" /etc/samba/smb.conf)" ]; then
+#   if [ -z "$(grep -i "follow symlinks" /etc/samba/smb.conf)" ]; then
+#      sed -i '/\[global\]/a         follow symlinks = yes' /etc/samba/smb.conf
+#   fi
+   if ! [ -z "$(grep -i "wide symlinks" /etc/samba/smb.conf)" ]; then
       sed -i '/\[global\]/a         wide symlinks = yes' /etc/samba/smb.conf
    fi
    if [ -z "$(grep -i "unix extensions" /etc/samba/smb.conf)" ]; then
@@ -57,9 +57,9 @@ fi
 if [ -z "$(grep -i "min protocol = SMB2" /etc/samba/smb.conf)" ]; then
    sed -i '/\[global\]/a         min protocol = SMB2' /etc/samba/smb.conf
 fi
-if [ -z "$(grep -i "socket options" /etc/samba/smb.conf)" ]; then
-   sed -i '/\[global\]/a         socket options = TCP_NODELAY SO_RCVBUF=8192 SO_SNDBUF=8192' /etc/samba/smb.conf
-fi
+#if [ -z "$(grep -i "socket options" /etc/samba/smb.conf)" ]; then
+#   sed -i '/\[global\]/a         socket options = TCP_NODELAY SO_RCVBUF=8192 SO_SNDBUF=8192' /etc/samba/smb.conf
+#fi
 
 # Se ainda não tem o compartilhamento do SIGER configurado
 if [ -z "$(grep -i "\[SIGER\]" /etc/samba/smb.conf)" ]; then

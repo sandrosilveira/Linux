@@ -68,12 +68,12 @@ if [ -z "$(grep -i "\[SIGER\]" /etc/samba/smb.conf)" ]; then
    echo "        path = /usr/local/SIGER" >> /etc/samba/smb.conf
    echo "        read only = No" >> /etc/samba/smb.conf
    echo "        browseable = yes" >> /etc/samba/smb.conf
-   echo "        create mask = 2777" >> /etc/samba/smb.conf
-   echo "        directory mask = 2777" >> /etc/samba/smb.conf
+   echo "        create mask = 0777" >> /etc/samba/smb.conf
+   echo "        directory mask = 0777" >> /etc/samba/smb.conf
    echo "        guest ok = yes" >> /etc/samba/smb.conf
    echo "        writable = yes" >> /etc/samba/smb.conf
-   echo "        force create mode = 2777" >> /etc/samba/smb.conf
-   echo "        force directory mode = 2777" >> /etc/samba/smb.conf
+   echo "        force create mode = 0777" >> /etc/samba/smb.conf
+   echo "        force directory mode = 0777" >> /etc/samba/smb.conf
    echo "        force user = root" >> /etc/samba/smb.conf
 fi
 

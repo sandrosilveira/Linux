@@ -17,6 +17,12 @@ if ! [ -f /etc/samba/smb.conf ]; then
    fi
 fi
 
+# Se não instalou
+if ! [ -f /etc/samba/smb.conf ]; then
+   echo "*** Erro: Configsmb.sh não instalou o samba corretamente!"
+   exit
+fi
+
 # Se tem o SELINUX instalado
 if [ -f /etc/selinux/config ]; then
 # Desabilita se ainda não estiver

@@ -28,7 +28,8 @@ if [ -f /etc/selinux/config ]; then
 # Desabilita se ainda não estiver
    if [ -z "$(grep -i "SELINUX=disabled" /etc/selinux/config)" ]; then
       echo "Desabilitando SELINUX..."
-      sudo sed -i 's/SELINUX=*/SELINUX=disabled/g' /etc/selinux/config
+      sudo sed -i 's/SELINUX=enforcing/SELINUX=disabled/g' /etc/selinux/config
+      sudo sed -i 's/SELINUX=permissive/SELINUX=disabled/g' /etc/selinux/config
    fi
 fi
 

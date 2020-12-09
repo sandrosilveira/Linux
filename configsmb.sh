@@ -93,10 +93,6 @@ if [ -z "$(grep -i "\[SIGER\]" /etc/samba/smb.conf)" ]; then
    echo "        force user = root" >> /etc/samba/smb.conf
 fi
 
-# Testa os parâmetros
-echo "Testando os parâmetros..."
-testparm
-
 # Reinicia o serviço
 echo "Reiniciando o serviço..."
 if [ -f /etc/debian_version ]; then
@@ -105,3 +101,8 @@ else
    systemctl enable smb
    systemctl restart smb
 fi
+
+# Testa os parâmetros
+echo "Testando os parâmetros..."
+testparm
+

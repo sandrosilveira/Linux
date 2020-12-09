@@ -13,7 +13,15 @@ if ! [ -f /etc/samba/smb.conf ]; then
    if [ -f /etc/debian_version ]; then
       apt install -y samba
    else
-      dnf install -y samba
+      yum install -y samba
+   fi
+fi
+
+# Se tem o SELINUX instalado
+if [ -f /etc/selinux/config ]; then
+# Desabilita se ainda não estiver
+   if ! [ -z "$(grep -i "SELINUX=disabled" /etc/selinux/config)" ]; then
+      sudo sed -i 's/SELINUX=*/SELINUX=disabled/g' /etc/selinux/config
    fi
 fi
 
@@ -83,4 +91,8 @@ testparm
 
 # Reinicia o serviço
 echo "Reiniciando o serviço..."
-systemctl restart smbd
+if [ -f /etc/debian_version ]; then
+   systemctl restart smbd
+else
+   systemctl restart smb
+fi

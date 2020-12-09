@@ -102,5 +102,6 @@ echo "Reiniciando o serviço..."
 if [ -f /etc/debian_version ]; then
    systemctl restart smbd
 else
+   systemctl enable smb
    systemctl restart smb
 fi

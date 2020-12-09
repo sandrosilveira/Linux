@@ -7,8 +7,8 @@ if [ "$EUID" -ne 0 ]; then
   exit
 fi
 
-# Se não existe o arquivo de configuração do samba
-if ! [ -f /etc/samba/smb.conf ]; then
+# Se não existe o executável de teste dos parâmetros do samba
+if ! [ -x "$(command -v testparm)" ]; then
    echo "Instalando samba..."
    if [ -f /etc/debian_version ]; then
       apt install -y samba
@@ -17,16 +17,17 @@ if ! [ -f /etc/samba/smb.conf ]; then
    fi
 fi
 
-# Se não instalou
-if ! [ -f /etc/samba/smb.conf ]; then
-   echo "*** Erro: Configsmb.sh não instalou o samba corretamente!"
+# Se não instalou corretamente o samba
+if ! [ -x "$(command -v testparm)" ]; then
+   echo "*** Erro: Configsmb.sh não instalou o samba corretamente, verifique problema com repositórios!"
    exit
 fi
 
 # Se tem o SELINUX instalado
 if [ -f /etc/selinux/config ]; then
 # Desabilita se ainda não estiver
-   if ! [ -z "$(grep -i "SELINUX=disabled" /etc/selinux/config)" ]; then
+   if [ -z "$(grep -i "SELINUX=disabled" /etc/selinux/config)" ]; then
+      echo "Desabilitando SELINUX..."
       sudo sed -i 's/SELINUX=*/SELINUX=disabled/g' /etc/selinux/config
    fi
 fi

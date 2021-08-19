@@ -33,6 +33,15 @@ if [ -f /etc/selinux/config ]; then
    fi
 fi
 
+# Se não configurou os limites
+if [ -z "$(grep -i "nofile 16384" /etc/security/limits.conf)" ]; then
+   echo "Configurando limites do sistema operacional..."
+   sudo echo "root soft nofile 16384" >> /etc/security/limits.conf
+   sudo echo "root hard nofile 32768" >> /etc/security/limits.conf
+   sudo echo "* soft nofile 16384" >> /etc/security/limits.conf
+   sudo echo "* hard nofile 32768" >> /etc/security/limits.conf
+fi
+
 # Se não existe o diretório do SIGER
 if ! [ -d "/usr/local/SIGER" ]; then
    echo "Criando diretório padrão do SIGER..."

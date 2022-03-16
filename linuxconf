@@ -9,13 +9,13 @@ fi
 # Se existe o grupo do virtualbox
 if [ -z "$(grep "vboxsf" /etc/group)" ]; then
    echo "Configurando grupo do vboxsf..."
-   sudo usermod -a -G vboxsf $USERNAME
+   usermod -a -G vboxsf $USERNAME
 fi
 # Coloca permissão na montagem das pastas compartilhadas
 if [ -d "/media" ]; then
    if ! [ -x "/media" ]; then
       echo "Atribuindo permissão nas pastas compartilhadas..."
-      sudo chmod 777 /media
+      chmod 777 /media
    fi
 fi
 # Identifica se tem /etc/bash.bashrc (ubuntu) ou /etc/bashrc (centos)
@@ -31,36 +31,36 @@ if [ -z "$(grep "alias cls" $BASHRC)" ]; then
    echo "Configurando aliases no $BASHRC ..."
    # Se estiver rodando em WSL
    if [ "$(uname -r | grep -i Microsoft)" ]; then
-      sudo echo "alias cls='tput reset; tput clear" >> $BASHRC
+      echo "alias cls='tput reset; tput clear" >> $BASHRC
    else
-      sudo echo "alias cls='tput reset'" >> $BASHRC
+      echo "alias cls='tput reset'" >> $BASHRC
    fi
-   sudo echo "alias lf='ls -F'" >> $BASHRC
-   sudo echo "alias lt='ls -lrt'" >> $BASHRC
-   sudo echo "alias ltr='ls -lt'" >> $BASHRC
-   sudo echo "alias grep='grep --directories=skip --color=auto'" >> $BASHRC
-   sudo echo "alias is='cd \$ISCOBOL'" >> $BASHRC
-   sudo echo "alias iscs='cd \$ISCOBOL/sample;sh isControlset.sh &'" >> $BASHRC
-   sudo echo "alias sb='cd /usr/local/bin'" >> $BASHRC
-   sudo echo "alias s='cd /RECH/USR'" >> $BASHRC
-   sudo echo "alias ctree='cd /usr/local/CtreeSQLServer/BASES/00571S004'" >> $BASHRC
-   sudo echo "alias go='. godir'" >> $BASHRC
-   sudo echo "alias ccat='pygmentize -g'" >> $BASHRC
+   echo "alias lf='ls -F'" >> $BASHRC
+   echo "alias lt='ls -lrt'" >> $BASHRC
+   echo "alias ltr='ls -lt'" >> $BASHRC
+   echo "alias grep='grep --directories=skip --color=auto'" >> $BASHRC
+   echo "alias is='cd \$ISCOBOL'" >> $BASHRC
+   echo "alias iscs='cd \$ISCOBOL/sample;sh isControlset.sh &'" >> $BASHRC
+   echo "alias sb='cd /usr/local/bin'" >> $BASHRC
+   echo "alias s='cd /RECH/USR'" >> $BASHRC
+   echo "alias ctree='cd /usr/local/CtreeSQLServer/BASES/00571S004'" >> $BASHRC
+   echo "alias go='. godir'" >> $BASHRC
+   echo "alias ccat='pygmentize -g'" >> $BASHRC
 fi
 # Se ainda não tem a função do change_dir configurada
 if [ -z "$(grep "change_dir" $BASHRC)" ]; then
    echo "Configurando change_dir ..."
-   sudo echo "function change_dir() {" >> $BASHRC
-   sudo echo "    cd \$1" >> $BASHRC
-   sudo echo "}" >> $BASHRC
-   sudo echo "export -f change_dir" >> $BASHRC
+   echo "function change_dir() {" >> $BASHRC
+   echo "    cd \$1" >> $BASHRC
+   echo "}" >> $BASHRC
+   echo "export -f change_dir" >> $BASHRC
 fi
 # Se ainda não tem a configuração de completamento do bash
 if [ -z "$(grep "completion-ignore-case" /etc/inputrc)" ]; then
    echo "Configurando tab completion..."
-   sudo echo "TAB: menu-complete" >> /etc/inputrc
-   sudo echo "set completion-ignore-case on" >> /etc/inputrc
-   sudo echo "\"\e[Z\": \"\e-1\C-i\"" >> /etc/inputrc
+   echo "TAB: menu-complete" >> /etc/inputrc
+   echo "set completion-ignore-case on" >> /etc/inputrc
+   echo "\"\e[Z\": \"\e-1\C-i\"" >> /etc/inputrc
 fi
 # Instalação do Git
 if ! [ -x "$(command -v git)" ]; then
@@ -125,7 +125,7 @@ fi
 if [ -z "$(dmesg | grep -i "DMI:.*VirtualBox")" ]; then
    echo "Ajustando timeout do grub..."
    # Ajusta o timeout do grub
-   sudo sed -i 's/GRUB_TIMEOUT=[0-9]*/GRUB_TIMEOUT=0/g' /etc/default/grub
+   sed -i 's/GRUB_TIMEOUT=[0-9]*/GRUB_TIMEOUT=0/g' /etc/default/grub
 fi
 # Outras instalações (na pasta de scripts do sistema)
 cd /usr/local/bin
@@ -169,6 +169,6 @@ apps="vars quebrapath md godir gnomeconf"
 for app in $apps; do
    echo Instalando $app...
    cd /usr/local/bin
-   sudo wget https://github.com/sandrosilveira/Linux/raw/master/$app -O $app
-   sudo chmod 777 $app
+   wget https://github.com/sandrosilveira/Linux/raw/master/$app -O $app
+   chmod 777 $app
 done
